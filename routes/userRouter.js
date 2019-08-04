@@ -104,9 +104,4 @@ router.get('/user/:uId', (req, res) => {
 })
 
 module.exports = router
-let test = [
-  { mId: '123', mUrl: 'http://123', mTotalLong: 'lo213123ng' },
-  { mId: '123', mUrl: 'http://123', mTotalLong: 'lo213123ng' },
-  { mId: '123', mUrl: 'http://123', mTotalLong: 'lo213123ng' },
-  { mId: '123', mUrl: 'http://123', mTotalLong: 'lo213123ng' }
-]
+
