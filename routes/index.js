@@ -7,9 +7,13 @@ router.get('/viewTest', function (req, res, next) {
   console.log(123)
   res.render('view')
 })
-router.get('/musicview', function (req, res, next) {
+router.get('/musicView', function (req, res, next) {
   console.log(123)
   res.render('music')
+})
+router.get('/videoView123', function (req, res, next) {
+  console.log(123)
+  res.render('video')
 })
 router.get('/viewTest', function (req, res, next) {
   console.log(123)

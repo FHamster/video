@@ -15,7 +15,6 @@ var ejs = require('ejs');  //我是新引入的ejs插件
 
 
 var app = express()
-
 //设置允许跨域访问该服务.
 app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -24,7 +23,6 @@ app.all('*', function (req, res, next) {
   res.header('Content-Type', 'application/json;charset=utf-8');
   next();
 });
-
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -49,6 +47,5 @@ app.use('/api', markRouter)
 app.use('/api', musicMarkRouter)
 app.use('/api', musicRouter)
 app.use('/api', videoRouter)
-
 
 module.exports = app
