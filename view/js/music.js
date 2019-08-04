@@ -173,16 +173,12 @@ next.onclick = function () {
 
 
 function getGe(){
-    let str =`http://127.0.0.1:3000/api/apiTest/gdlist`;
+    let str = `http://127.0.0.1:3000/api/mmark?uId=${'001'}`
     console.log(str);
     $.ajax({
         type:'GET',
         contentType: 'application/json;charset=UTF-8',
         url:str,
-        // data:{
-        //     uId:uid
-        // },
-        // dataType: "json",
         success: function (res) {
             console.log(res)
         },
