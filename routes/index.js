@@ -9,11 +9,17 @@ router.get('/viewTest', function (req, res, next) {
 })
 router.get('/musicView', function (req, res, next) {
   console.log(123)
+  // res.type('html')
   res.render('music')
 })
-router.get('/videoView123', function (req, res, next) {
+router.get('/videoView', function (req, res, next) {
   console.log(123)
+  // res.type('html')
   res.render('video')
+})
+router.get('/videoView2', function (req, res, next) {
+  console.log(123)
+  res.render('video2')
 })
 router.get('/viewTest', function (req, res, next) {
   console.log(123)

@@ -48,6 +48,7 @@ body{
 }
 
 .main .left .video{
+    background-color: black;
     height: 443px;
     width: 100%;
     /*border: solid blue;*/
@@ -68,7 +69,7 @@ body{
 .main .left .video .program .bar{
     float: left;
     height: 3px;
-    width: 20%;
+    width: 0;
     background-color: #E83C3C;
 }
 /*.main .left .video .program .bar .circle{*/
@@ -176,7 +177,7 @@ body{
 }
 .main .left .video .control .volume .v_program .v_bar{
     height: 2px;
-    width: 30%;
+    width: 100%;
     background-color: #E83C3C;
 }
 
