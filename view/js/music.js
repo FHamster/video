@@ -1,7 +1,7 @@
 var audio = document.getElementById('audio');
 var play = document.getElementById('play');
 var bfq = document.getElementById('bfq');
-var gnum = document.getElementById('gum');
+// var gnum = document.getElementById('gum');
 var gul = document.getElementById('gul');
 var main = document.getElementById('main');
 var pic = document.getElementById('pic');
@@ -87,7 +87,6 @@ var mlist = [
 var gdlist = [];
 var nowIndex = 0;
 var uid = '001';
-var gIndex = 0;
 
 
 simg.onclick = function () {
@@ -224,7 +223,7 @@ playbtn.onclick = function () {
 }
 
 function getGe(){
-    let str =`http://127.0.0.1:3000/api/apiTest`;
+    let str = `http://127.0.0.1:3000/api/mmark?uId=${'001'}`
     console.log(str);
     $.ajax({
         type:'GET',
@@ -310,7 +309,7 @@ function showMlist() {
     })
     mnum.innerText = mlist.length + '首歌';
     rlist.innerHTML = copyList.join('');
-    
+
 }
 
 
