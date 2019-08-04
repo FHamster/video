@@ -233,10 +233,11 @@ function getGe(){
         url:str,
         success: function (res) {
             // console.log(res);
+            gdlist = [];
             for(let i = 0; i < res.length; i++){
                 gdlist.push({name:res[i].folder_name,url:res[i].mmark_url});
             }
-            console.log(gdlist);
+            // console.log(gdlist);
             showGedan();
             choose(0);
         },
@@ -255,7 +256,7 @@ function getMlist() {
         contentType: 'application/json;charset=UTF-8',
         url:str,
         success: function (res) {
-            console.log(res);
+            // console.log(res);
             mlist = [];
             //name time singer time
             for(let i = 0; i < res.length; i ++){
@@ -268,7 +269,7 @@ function getMlist() {
                     murl: res[i].m_url
                 })
             }
-            console.log(mlist);
+            // console.log(mlist);
             showMlist();
         },
         //请求失败回调函数
@@ -366,7 +367,7 @@ function getHead(){
         contentType: 'application/json;charset=UTF-8',
         url:str,
         success: function (res) {
-            console.log(res);
+            // console.log(res);
             uname.innerText = res.u_nickname;
             uimg.src = res.u_avator_url;
         },
@@ -381,4 +382,5 @@ function getHead(){
 window.onload = function () {
     getGe();
     getHead();
+    getHeadbar()
 }
