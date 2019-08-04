@@ -224,7 +224,7 @@ playbtn.onclick = function () {
 }
 
 function getGe(){
-    let str = `http://127.0.0.1:3000/api/mmark?uId=${'001'}`
+    let str = `http://127.0.0.1:3000/api/mmark?uId=${uid}`
     // console.log(str);
     $.ajax({
         type:'GET',
@@ -248,7 +248,7 @@ function getGe(){
 }
 
 function getMlist() {
-    let str = `http://127.0.0.1:3000/api/queryMusic?uId=${'001'}&folderName=${gdlist[markNum].name}`
+    let str = `http://127.0.0.1:3000/api/queryMusic?uId=${uid}&folderName=${gdlist[markNum].name}`
     $.ajax({
         type:'GET',
         contentType: 'application/json;charset=UTF-8',
@@ -358,6 +358,26 @@ function setAudio(index){
     audio.play();
 }
 
+function getHead(){
+    let str = `http://127.0.0.1:3000/api/user/${uid}`;
+    $.ajax({
+        type:'GET',
+        contentType: 'application/json;charset=UTF-8',
+        url:str,
+        success: function (res) {
+            console.log(res);
+            uname.innerText = res.u_nickname;
+            uimg.src = res.u_avator_url;
+        },
+        //请求失败回调函数
+        error: function (e) {
+            console.log(e.status)
+            console.log(e.responseText)
+        }
+    })
+}
+
 window.onload = function () {
     getGe();
+    getHead();
 }
