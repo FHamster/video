@@ -13,28 +13,88 @@ var full = document.getElementById('full');
 var volume = document.getElementById('volume');
 var v_program = document.getElementById('v_program');
 var v_bar = document.getElementById('v_bar');
-var volumeNumber = 0.5;
+// var volumeNumber = 0.5;
 var isMute = false;
+
+var collect = document.getElementById('collect');
+
+var videoList = [];
+var thisVideo;
+var user;
+
+var title = document.getElementById('title');
+var produceMain = document.getElementById('produceMain');
+var listMain = document.getElementById('listMain');
+
+var lis = document.getElementsByTagName('li');
+
+window.onload = function(){
+    ajax({
+        type : 'GET',
+        url : 'http://127.0.0.1:3000/api/video/',
+        success : function (res) {
+            for( var i = 0; i < 5; i++){
+                videoList.push(res.data[i]);
+            }
+        }
+    });
+
+    // user 获取
+
+    // thisVideo 需获取
+
+
+    //写入thisVideo的数据
+    pushVideo(thisVideo);
+
+    for(var i = 0; i < 5; i++){
+        var li =document.getElementById('number'+i);
+        li.childNodes[1].src = videoList[i].pic;//封面图
+        li.childNodes[3].childNodes[1].innerHTML = videoList[i].v_title;
+        li.childNodes[3].childNodes[3].innerHTML = getTime(videoList[i].v_long);
+        li.onclick = function () {
+            for(var j = 0; j < videoList.length; j++){
+                if(videoList[j].title == li.childNodes[3].childNodes[1].innerHTML){
+                    thisVideo = videoList[j];
+                    pushVideo(thisVideo);
+                    break;
+                }
+            }
+        }
+    }
+
+    // console.log(lis[0].childNodes[3].childNodes[3].innerHTML);
+
+};
+
+//将 video 的信息写在页面上
+function pushVideo(nowVideo){
+    title.innerHTML = nowVideo.v_title;//标题
+    video.src = nowVideo.v_url;//url地址
+    video.poster = nowVideo.v_pic;//封面图
+    endTime.innerHTML = getTime(nowVideo.v_long);//时长
+    produceMain.innerHTML = nowVideo.v_spec;//简介
+}
 
 //视频点击播放及暂停
 play.onclick = function () {
     if(isPlay){
-        play.src = 'img/on/play.png';
+        play.src = 'img/video/on/play.png';
         video.pause();
         isPlay = false;
     }else{
-        play.src = 'img/on/stop.png';
+        play.src = 'img/video/on/stop.png';
         video.play();
         isPlay = true;
     }
 };
 video.onclick = function () {
     if(isPlay){
-        play.src = 'img/off/play.png';
+        play.src = 'img/video/off/play.png';
         video.pause();
         isPlay = false;
     }else{
-        play.src = 'img/off/stop.png';
+        play.src = 'img/video/off/stop.png';
         video.play();
         isPlay = true;
     }
@@ -105,10 +165,33 @@ v_program.onclick = function(e){
 //按钮
 volume.onclick = function () {
     if(isMute){
+        volume.src ='img/video/on/volume.png';
+        v_bar.style.width = video.volume * 100 + '%';
+
         video.muted = false;
         isMute = false;
     }else{
+        volume.src ='img/video/on/mute.png';
+        v_bar.style.width = '0';
         video.muted = true;
         isMute = true;
     }
+};
+
+//收藏
+collect.onclick = function () {
+    ajax({
+        type: 'POST',
+        url: 'http://127.0.0.1:3000/api/mark',
+        data: {
+            vId : thisVideo.id,
+            uId : user.id,
+        },
+        success:function (res) {
+            console.log(res);
+        },
+        error:function (e) {
+            console.log('错误：' + e.responseText);
+        }
+    });
 };
