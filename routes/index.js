@@ -4,19 +4,18 @@ let MyQuery = require('./MySqlInter')
 
 /* GET home page. */
 router.get('/viewTest', function (req, res, next) {
-  console.log(123)
   res.render('view')
 })
 router.get('/musicView', function (req, res, next) {
-  console.log(123)
+  // res.type('html')
   res.render('music')
 })
-router.get('/videoView123', function (req, res, next) {
-  console.log(123)
+router.get('/videoView', function (req, res, next) {
+  // res.type('html')
   res.render('video')
 })
+
 router.get('/viewTest', function (req, res, next) {
-  console.log(123)
   res.render('view')
 })
 
