@@ -153,6 +153,7 @@ function toTime(t) {
 
 audio.addEventListener('timeupdate', function () {
     nowTime.innerText = toTime(audio.currentTime);
+    endTime.innerText = '/'  + toTime(audio.duration);
     progressBar.style.width = audio.currentTime / audio.duration * 100 + '%';
     var pos = -10 + audio.currentTime / audio.duration * 500 -5;
     if(pos > -13){
@@ -259,7 +260,7 @@ function getMlist() {
             //name time singer time
             for(let i = 0; i < res.length; i ++){
                 mlist.push({
-                    name : res[i].folder_name,
+                    name : res[i].m_album,
                     time : res[i].m_total_long,
                     singer: res[i].m_artist,
                     from: res[i].m_album,
