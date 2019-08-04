@@ -14,6 +14,10 @@ router.get('/videoView', function (req, res, next) {
   // res.type('html')
   res.render('video')
 })
+router.get('/myVideoView', function (req, res, next) {
+  // res.type('html')
+  res.render('myVideo')
+})
 
 router.get('/viewTest', function (req, res, next) {
   res.render('view')

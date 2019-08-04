@@ -8,7 +8,7 @@ $(function () {
     //请求地址
     url: 'http://127.0.0.1/admin/list/',
     //数据，json字符串
-    data: { asd: 123},
+    data: { asd: 123 },
     //请求成功回调函数
     success: function (result) {
       console.log(result)
@@ -21,4 +21,3 @@ $(function () {
   })
 })
 
-}
