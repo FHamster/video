@@ -137,3 +137,7 @@ pre.onclick = function () {
 next.onclick = function () {
     
 }
+
+function getHeadUrl() {
+    $.ajax()
+}
