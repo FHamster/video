@@ -163,6 +163,14 @@ audio.addEventListener('timeupdate', function () {
 
 })
 
+audio.addEventListener('ended', function () {
+    if(!isSingle){
+        nex();
+    }else{
+        audio.play();
+    }
+})
+
 var waitTime = setTimeout(function () {
     //判断当前加载情况
     if (audio.readyState > 2) {
@@ -196,7 +204,9 @@ pre.onclick = function () {
     }
 }
 
-next.onclick = function () {
+next.onclick = nex;
+
+function nex() {
     if(mlist.length){
         nowIndex ++;
         nowIndex %= mlist.length;
@@ -241,9 +251,11 @@ function choose(index) {
     showGedan();
 }
 
+// ${index == nowIndex?'ongblock':''}
+
 function showGedan() {
     var copyList = gdlist.map(function (item,index) {
-        return `<li onclick="choose(${index})" class="${index == nowIndex?'ongblock':''}">
+        return `<li onclick="choose(${index})" class="gblock">
                 <div  class="gblock clearFloat">
                 <img src="${item.url}" class="gimg">
                 <div  class="gbname">${item.name}</div>
@@ -253,17 +265,13 @@ function showGedan() {
     gul.innerHTML = copyList.join('');
 }
 
-function bofang(index) {
-    setAudio(index);
-}
-
 function showMlist() {
     var copyList = mlist.map(function (item,index) {
         return `<tr>
                 <th>
                     <div class="r1">
                         <span>${index + 1}</span>
-                        <img src="${index != nowIndex?'img/mplay-b.png':'img/mplay-r.png'}" onclick="bofang(${index})">
+                        <img src="img/mplay-b.png" onclick="bofang(${index})" id="${'kimg'+index}">
                     </div>
 
                 </th>
@@ -292,6 +300,15 @@ function showMlist() {
     mnum.innerText = mlist.length + '首歌';
     rlist.innerHTML = copyList.join('');
     
+}
+
+
+function bofang(index) {
+    setAudio(index);
+    showMlist();
+    var str = 'kimg' + index;
+    var kimg = document.getElementById(str);
+    kimg.src = 'img/mplay-r.png';
 }
 
 function setAudio(index){
