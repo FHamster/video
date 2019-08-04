@@ -29,7 +29,7 @@ var listMain = document.getElementById('listMain')
 var lis = document.getElementsByTagName('li')
 
 window.onload = function () {
-  ajax({
+  $.ajax({
     type: 'GET',
     url: 'http://127.0.0.1:3000/api/video/',
     success: function (res) {
