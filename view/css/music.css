@@ -71,6 +71,8 @@ body {
     display: block;
     border: 1px solid whitesmoke;
     position: absolute;
+    background-size: cover;
+
 }
 
 .bfq .main .show .wenzi {

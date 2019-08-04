@@ -235,17 +235,13 @@ function getGe(){
         // dataType: "json",
         success: function (res) {
             console.log(res);
-            // gdlist = res.data.map(function (item,index) {
-            //     return {
-            //         // index:index,
-            //         name:item.folder_name,
-            //         url:item.mmark_url
-            //     }
-            // })
             for(let i = 0; i < res.length; i++){
-                gdlist.push({name:res[i].name,url:res[i].url});
+                gdlist.push({name:res[i].folder_name,url:res[i].mmark_url});
             }
             console.log(gdlist);
+            showGedan();
+            choose(1);
+            showMlist();
         },
         //请求失败回调函数
         error: function (e) {
@@ -270,6 +266,7 @@ function showGedan() {
 }
 
 function choose(index) {
+    console.log(index);
     pic.style.backgroundImage = 'url(' + gdlist[index].url + ')';
     te.innerHTML = gdlist[index].name;
     showGedan();
@@ -333,7 +330,5 @@ function setAudio(index){
 
 window.onload = function () {
     getGe();
-    showGedan();
-    choose(0);
-    showMlist();
+
 }
