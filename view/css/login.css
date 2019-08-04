@@ -1,0 +1,112 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.main{
+    width: 1000px;
+    height: 800px;
+    margin: auto;
+}
+
+.main .top{
+    width: 1000px;
+    height: 200px;
+    overflow: hidden;
+    margin: auto;
+}
+
+.main .top img{
+    width: 1000px;
+    margin-top: -100px;
+}
+
+.main .type{
+    height: 60px;
+    width: 1000px;
+    margin: 20px auto;
+}
+
+.main .type .bar{
+    display: block;
+    float: left;
+    width: 430px;
+    height: 2px;
+    margin: 29px 0 0 0;
+    background-color: #DDDDDD;
+}
+.main .type .font{
+    display: block;
+    float: left;
+    line-height: 60px;
+    font-size: 40px;
+    margin: auto 30px;
+}
+
+.main .log {
+    width: 1000px;
+    height: 500px;
+    /*border: 1px solid black;*/
+}
+
+.main .log .pic{
+    display: block;
+    float: left;
+    width: 500px;
+    height: 500px;
+    border-right: 1px solid #DDDDDD;
+}
+
+.main .log .pic img{
+    width: 400px;
+    height: 400px;
+    margin: 50px;
+}
+
+.main .log .signIn{
+    display: block;
+    float: right;
+    width: 469px;
+    height: 500px;
+    /*margin-left: 30px;*/
+    border: 1px solid black;
+}
+
+.main .log .signIn .userName{
+    width: 388px;
+    border: 1px solid #dddddd;
+    font-size: 14px;
+    padding: 10px;
+    height: 18px;
+    vertical-align: middle;
+    border-radius: 4px;
+    margin: 20px auto;
+}
+.main .log .signIn .userPassword{
+    width: 388px;
+    border: 1px solid #dddddd;
+    font-size: 14px;
+    padding: 10px;
+    height: 18px;
+    vertical-align: middle;
+    border-radius: 4px;
+    margin: 20px auto;
+}
+
+.main .log .signIn .login{
+    display: inline-block;
+    float: left;
+    border: 1px solid #0381aa;
+    color: #fff;
+    background-color: #00a7de;
+    height: 36px;
+    border-radius: 2px;
+    width: 184px;
+    line-height: 38px;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+}
+.main .log .signIn .login:hover{
+
+}

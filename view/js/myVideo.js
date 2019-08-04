@@ -1,12 +1,12 @@
 var cards = document.getElementById('cards');
 
-var list = [{ v_title:'血腥夜愿',v_url: 'img/video/2K-血腥夜愿.jpg',v_long:'321'},
-    {v_title:'血腥夜愿',v_url: 'img/video/2K-血腥夜愿.jpg',v_long:'321'},
-    {v_title:'血腥夜愿',v_url: 'img/video/2K-血腥夜愿.jpg',v_long:'321'},
-    {v_title:'血腥夜愿',v_url: 'img/video/2K-血腥夜愿.jpg',v_long:'321'},
-    {v_title:'血腥夜愿',v_url: 'img/video/CGNS-2K-012.jpg',v_long:'321'},
-    {v_title:'血腥夜愿',v_url: 'img/video/2K-血腥夜愿.jpg',v_long:'321'},
-    {v_title:'血腥夜愿',v_url: 'img/video/2K-血腥夜愿.jpg',v_long:'321'}];
+var list = [{ v_title:'血腥夜愿',v_url: 'img/video/2K-血腥夜愿.jpg',v_total_long:'321'},
+    {v_title:'血腥夜愿',v_url: 'img/video/2K-血腥夜愿.jpg',v_total_long:'321'},
+    {v_title:'血腥夜愿',v_url: 'img/video/2K-血腥夜愿.jpg',v_total_long:'321'},
+    {v_title:'血腥夜愿',v_url: 'img/video/2K-血腥夜愿.jpg',v_total_long:'321'},
+    {v_title:'血腥夜愿',v_url: 'img/video/CGNS-2K-012.jpg',v_total_long:'321'},
+    {v_title:'血腥夜愿',v_url: 'img/video/2K-血腥夜愿.jpg',v_total_long:'321'},
+    {v_title:'血腥夜愿',v_url: 'img/video/2K-血腥夜愿.jpg',v_total_long:'321'}];
 
 //获取我的收藏视频 list
 
@@ -30,7 +30,7 @@ window.onload = function () {
                     '                <img src="' + item.v_url + '">\n' +
                     '                <div class="produce">\n' +
                     '                    <div class="cardTitle">' + item.v_title + '</div>\n' +
-                    '                    <div class="cardTime">' + getTime(item.v_long) + '</div>\n' +
+                    '                    <div class="cardTime">' + getTime(parseInt(item_total_long)) + '</div>\n' +
                     '                </div>\n' +
                     '            </div>\n' +
                     '        </div>'
