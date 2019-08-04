@@ -34,6 +34,7 @@ var isPlay = false;
 var mlist = [];
 var gdlist = [];
 var nowIndex = 0;
+var uid = '001';
 
 
 simg.onclick = function () {
@@ -135,9 +136,27 @@ pre.onclick = function () {
 }
 
 next.onclick = function () {
-    
+    getHeadUrl();
 }
 
-function getHeadUrl() {
-    $.ajax()
+function getHeadUrl(){
+    let str =`http://127.0.0.1:3000/api/user/${uid}`;
+    console.log(str);
+    $.ajax({
+        type:'GET',
+        contentType: 'application/json;charset=UTF-8',
+        url:str,
+        data:{
+            uId:uid
+        },
+        // dataType: "json",
+        success: function (result) {
+            console.log(result)
+        },
+        //请求失败回调函数
+        error: function (e) {
+            console.log(e.status)
+            console.log(e.responseText)
+        }
+    })
 }
