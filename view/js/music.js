@@ -1,7 +1,7 @@
 var audio = document.getElementById('audio');
 var play = document.getElementById('play');
 var bfq = document.getElementById('bfq');
-var gnum = document.getElementById('gum');
+// var gnum = document.getElementById('gum');
 var gul = document.getElementById('gul');
 var main = document.getElementById('main');
 var pic = document.getElementById('pic');
@@ -31,8 +31,24 @@ var bimg = document.getElementById('bimg');
 var isSound = false;
 var isSingle = false;
 var isPlay = false;
-var mlist = [];
-var gdlist = [];
+var mlist = [
+    // {
+    //     name:''//歌曲名,
+    //     time:'',//时长
+    //     singer:'',//歌手
+    //     from:'',//专辑
+    //     purl:'',//专辑图片路径
+    //     murl:'',//歌曲路径
+    // }
+];
+var gdlist = [
+    // {
+    //     index:'',
+    //     name:'',//名字
+    //     num:'',//歌曲数量
+    //     url:'',//图片路径
+    // }
+];
 var nowIndex = 0;
 var uid = '001';
 
@@ -132,11 +148,26 @@ play.onclick = function () {
 }
 
 pre.onclick = function () {
-    
+    nowIndex --;
+    if(nowIndex < 0){
+        nowIndex = mlist.length - 1;
+    }
+
+    if(mlist.length){
+        audio.src = mlist[nowIndex].murl;
+        ngname.innerText = mlist[nowIndex].name;
+        ngspan.innerText = mlist[nowIndex].singer;
+    }
 }
 
 next.onclick = function () {
-    getHeadUrl();
+    if(mlist.length){
+        nowIndex ++;
+        nowIndex %= mlist.length;
+        audio.src = mlist[nowIndex].murl;
+        ngname.innerText = mlist[nowIndex].name;
+        ngspan.innerText = mlist[nowIndex].singer;
+    }
 }
 
 function getHeadUrl(){
@@ -150,8 +181,8 @@ function getHeadUrl(){
             uId:uid
         },
         // dataType: "json",
-        success: function (result) {
-            console.log(result)
+        success: function (res) {
+            console.log(res)
         },
         //请求失败回调函数
         error: function (e) {
@@ -159,4 +190,9 @@ function getHeadUrl(){
             console.log(e.responseText)
         }
     })
+}
+
+function showGedan() {
+
+
 }
