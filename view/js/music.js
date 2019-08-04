@@ -28,27 +28,64 @@ var vol = document.getElementById('vol');
 var volbar = document.getElementById('volbar');
 var bimg = document.getElementById('bimg');
 
+var markNum = 0;
 var isSound = false;
 var isSingle = false;
 var isPlay = false;
-var mlist = [
-    // {
-    //     name:''//歌曲名,
-    //     time:'',//时长
-    //     singer:'',//歌手
-    //     from:'',//专辑
-    //     purl:'',//专辑图片路径
-    //     murl:'',//歌曲路径
-    // }
-];
-var gdlist = [
-    // {
-    //     index:'',
-    //     name:'',//名字
-    //     num:'',//歌曲数量
-    //     url:'',//图片路径
-    // }
-];
+// var mlist = [
+//     {
+//         name:'The Black Case',//歌曲名,
+//         time:'01:42',//时长
+//         singer:'KillerBlood',//歌手
+//         from:'Cytus-Prologue-',//专辑
+//         purl:'http://p2.music.126.net/753pgNXuQ93-Bakdzbqryw==/2489294325303322.jpg?param=177y177',//专辑图片路径
+//         murl:'http://music.163.com/song/media/outer/url?id=476592630.mp3',//歌曲路径
+//     },{
+//         name: 'tief=blau',//歌曲名,
+//         time:'04:03',//时长
+//         singer:'Foxtail-Grass Studio',//歌手
+//         from:'monocolotion',//专辑
+//         purl:'http://p2.music.126.net/JIDe8pSNjYcXi5g6TbB1pQ==/5746047766839678.jpg?param=177y177',//专辑图片路径
+//         murl:'http://music.163.com/song/media/outer/url?id= 27669791.mp3 ',//歌曲路径
+//     },{
+//         name: '意难忘',//歌曲名,
+//         time:'04:28',//时长
+//         singer:'蔡小虎',//歌手
+//         from:'思相枝',//专辑
+//         purl:'http://p2.music.126.net/dmqfLxjTvVjzyTxMASvL4A==/61572651156176.jpg?param=177y177',//专辑图片路径
+//         murl:'http://music.163.com/song/media/outer/url?id= 68968.mp3 ',//歌曲路径
+//     }, {
+//         name: 'はなしらべ',//歌曲名,
+//         time:'05:20',//时长
+//         singer:'郁原ゆう',//歌手
+//         from:'THE IDOLM@STER MILLION LIVE! M@STER SPARKLE 05',//专辑
+//         purl:'http://p2.music.126.net/2Ckgr-MI7NrvfqcDr3iUkQ==/109951163104652897.jpg?param=177y177',//专辑图片路径
+//         murl:'[图片]http://music.163.com/song/media/outer/url?id= 37176242.mp3 ',//歌曲路径
+//     }
+// ];
+// var gdlist = [
+//     {
+//         index:'12345678',
+//         name:'Cytus-Prologue-',//名字
+//         num:'35',//歌曲数量
+//         url:'http://p2.music.126.net/753pgNXuQ93-Bakdzbqryw==/2489294325303322.jpg?param=177y177',//图片路径
+//     }, {
+//         index:'2',
+//         name:'monocolotion',//名字
+//         url:'http://p2.music.126.net/JIDe8pSNjYcXi5g6TbB1pQ==/5746047766839678.jpg?param=177y177',//图片路径
+//     },{
+//         index:'1',
+//         name:'思相枝',//名字
+//         url:'http://p2.music.126.net/dmqfLxjTvVjzyTxMASvL4A==/61572651156176.jpg?param=177y177',//图片路径
+//     },{
+//         index:'3',
+//         name:'THE IDOLM@STER ',//名字
+//         url:'http://p2.music.126.net/2Ckgr-MI7NrvfqcDr3iUkQ==/109951163104652897.jpg?param=177y177',//图片路径
+//     }
+// ];
+
+var mlist = [];
+var gdlist = [];
 var nowIndex = 0;
 var uid = '001';
 
@@ -60,7 +97,6 @@ simg.onclick = function () {
         audio.volume = 0;
         volbar.style.width = '0';
     }else{
-        console.log(1);
         simg.src ='img/msound.png';
         isSound = false;
         false// audio.volume = 0.3;
@@ -91,7 +127,7 @@ vol.onclick = function (e) {
 }
 
 progress.onclick = function (e) {
-    console.log(e.clientX + " " + progress.offsetLeft + " " + progress.clientWidth);
+    // console.log(e.clientX + " " + progress.offsetLeft + " " + progress.clientWidth);
     var cha = e.clientX - progress.offsetLeft;
     progressbar.style.width = cha / progress.clientWidth * 100 + '%';
     audio.currentTime = audio.duration * cha / progress.clientWidth;
@@ -117,6 +153,7 @@ function toTime(t) {
 
 audio.addEventListener('timeupdate', function () {
     nowTime.innerText = toTime(audio.currentTime);
+    endTime.innerText = '/'  + toTime(audio.duration);
     progressBar.style.width = audio.currentTime / audio.duration * 100 + '%';
     var pos = -10 + audio.currentTime / audio.duration * 500 -5;
     if(pos > -13){
@@ -127,6 +164,14 @@ audio.addEventListener('timeupdate', function () {
 
 })
 
+audio.addEventListener('ended', function () {
+    if(!isSingle){
+        nex();
+    }else{
+        audio.play();
+    }
+})
+
 var waitTime = setTimeout(function () {
     //判断当前加载情况
     if (audio.readyState > 2) {
@@ -134,6 +179,8 @@ var waitTime = setTimeout(function () {
         clearTimeout(waitTime);
     }
 }, 1000);
+
+
 
 play.onclick = function () {
     if (!isPlay) {
@@ -154,33 +201,45 @@ pre.onclick = function () {
     }
 
     if(mlist.length){
-        audio.src = mlist[nowIndex].murl;
-        ngname.innerText = mlist[nowIndex].name;
-        ngspan.innerText = mlist[nowIndex].singer;
+        setAudio(nowIndex);
     }
 }
 
-next.onclick = function () {
+next.onclick = nex;
+
+function nex() {
     if(mlist.length){
         nowIndex ++;
         nowIndex %= mlist.length;
-        audio.src = mlist[nowIndex].murl;
-        ngname.innerText = mlist[nowIndex].name;
-        ngspan.innerText = mlist[nowIndex].singer;
+        setAudio(nowIndex);
     }
 }
 
-
+playbtn.onclick = function () {
+    if(mlist.length){
+        nowIndex = 0;
+        setAudio(nowIndex);
+    }else{
+        alert('当前歌单无歌曲');
+    }
+}
 
 function getGe(){
-    let str = `http://127.0.0.1:3000/api/mmark?uId=${'001'}`
-    console.log(str);
+    let str = `http://127.0.0.1:3000/api/mmark?uId=${uid}`
+    // console.log(str);
     $.ajax({
         type:'GET',
         contentType: 'application/json;charset=UTF-8',
         url:str,
         success: function (res) {
-            console.log(res)
+            // console.log(res);
+            gdlist = [];
+            for(let i = 0; i < res.length; i++){
+                gdlist.push({name:res[i].folder_name,url:res[i].mmark_url});
+            }
+            // console.log(gdlist);
+            showGedan();
+            choose(0);
         },
         //请求失败回调函数
         error: function (e) {
@@ -190,11 +249,138 @@ function getGe(){
     })
 }
 
+function getMlist() {
+    let str = `http://127.0.0.1:3000/api/queryMusic?uId=${uid}&folderName=${gdlist[markNum].name}`
+    $.ajax({
+        type:'GET',
+        contentType: 'application/json;charset=UTF-8',
+        url:str,
+        success: function (res) {
+            // console.log(res);
+            mlist = [];
+            //name time singer time
+            for(let i = 0; i < res.length; i ++){
+                mlist.push({
+                    name : res[i].m_album,
+                    time : res[i].m_total_long,
+                    singer: res[i].m_artist,
+                    from: res[i].m_album,
+                    purl: res[i].m_album_url,
+                    murl: res[i].m_url
+                })
+            }
+            // console.log(mlist);
+            showMlist();
+        },
+        //请求失败回调函数
+        error: function (e) {
+            console.log(e.status)
+            console.log(e.responseText)
+        }
+    })
+
+}
+
 function showGedan() {
+    var copyList = gdlist.map(function (item,index) {
+        return `<li onclick="choose(${index})" class="gblock">
+                <div  class="gblock clearFloat">
+                <img src="${item.url}" class="gimg">
+                <div  class="gbname">${item.name}</div>
+                </div>
+                </li>`
+    })
+    gul.innerHTML = copyList.join('');
+}
+
+function choose(index) {
+    // console.log(index);
+    markNum == index;
+    pic.style.backgroundImage = 'url(' + gdlist[index].url + ')';
+    te.innerHTML = gdlist[index].name;
+    showGedan();
+    getMlist();
+}
+
+function showMlist() {
+    if(mlist.length){
+        var copyList = mlist.map(function (item,index) {
+            return `<tr>
+                <th>
+                    <div class="r1">
+                        <span>${index + 1}</span>
+                        <img src="img/mplay-b.png" onclick="bofang(${index})" id="${'kimg'+index}">
+                    </div>
+
+                </th>
+                <th>
+                    <div class="r2">
+                        ${item.name}
+                    </div>
+                </th>
+                <th>
+                    <div class="r3">
+                        ${item.time}
+                    </div>
+                </th>
+                <th>
+                    <div class="r4">
+                        ${item.singer}
+                    </div>
+                </th>
+                <th>
+                    <div class="r5">
+                        ${item.from}
+                    </div>
+                </th>
+            </tr>`
+        })
+        mnum.innerText = mlist.length + '首歌';
+        rlist.innerHTML = copyList.join('');
+    }
+
+}
 
 
+function bofang(index) {
+    setAudio(index);
+    showMlist();
+    var str = 'kimg' + index;
+    var kimg = document.getElementById(str);
+    kimg.src = 'img/mplay-r.png';
+}
+
+function setAudio(index){
+    audio.src = mlist[index].murl;
+    mpic.src = mlist[index].purl;
+    ngname.innerText = mlist[index].name;
+    ngspan.innerText = mlist[index].singer;
+    play.src = 'img/mpause.png';
+    isPlay = false;
+    audio.play();
+}
+
+function getHead(){
+    let str = `http://127.0.0.1:3000/api/user/${uid}`;
+    $.ajax({
+        type:'GET',
+        contentType: 'application/json;charset=UTF-8',
+        url:str,
+        success: function (res) {
+            // console.log(res);
+            uname.innerText = res.u_nickname;
+            uimg.src = res.u_avator_url;
+        },
+        //请求失败回调函数
+        error: function (e) {
+            console.log(e.status)
+            console.log(e.responseText)
+        }
+    })
 }
 
 window.onload = function () {
     getGe();
+    getHead();
+    getHeadbar()
 }

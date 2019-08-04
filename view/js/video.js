@@ -31,13 +31,13 @@ var lis = document.getElementsByTagName('li')
 window.onload = function () {
 
   console.log('var is ')
-  console.log(!{u_id})
   fun();
   // console.log(lis[0].childNodes[3].childNodes[3].innerHTML);
 
 }
 
 let fun = function () {
+
   $.ajax({
     type: 'GET',
     // async: false,
@@ -68,11 +68,14 @@ let fun = function () {
 
   // user 获取
 
+  let vId = document.getElementById('video_id').innerHTML
+  console.log('title:' + vId)
+  let url = `'http://127.0.0.1:3000/api/video/${vId}'`
   // thisVideo 需获取
   $.ajax({
     type: 'GET',
     // async: false,
-    url: 'http://127.0.0.1:3000/api/video/001',
+    url: url,
     success: function (res) {
       console.log(res)
       thisVideo = res

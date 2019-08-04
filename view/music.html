@@ -5,27 +5,49 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="css/music.css">
+    <link rel="stylesheet" href="css/head.css">
 </head>
 <body>
-<audio id="audio" src="http://music.163.com/song/media/outer/url?id=476592630.mp3" ></audio>
+<!--src="http://music.163.com/song/media/outer/url?id=476592630.mp3"-->
+<audio id="audio"  ></audio>
+<div id="head" class="head">
+   <div class="bar clearFloat">
+       <div id="logo" class="logo">
+           <img src="img/logo.png">
+       </div>
+       <div class="biaoti">
+           <div id="mzhuye" class="text">我的主页</div>
+       </div>
+       <div id="mvideo" class="biaoti">
+           <div class="text">我的视频</div>
+       </div>
+       <div id="mmusic" class="biaoti">
+           <div class="text">我的音乐</div>
+       </div>
+       <div id="loginGroup" class="loginGroup">
+           <div id="loginImg" class="loginImg"></div>
+           <div id="loginName" class="loginName">dfsdfsdfsdf</div>
+       </div>
+   </div>
+</div>
 <div id="bfq" class="clearFloat bfq">
     <div id="gedan" class="clearFloat gedan">
         <div id="mygeda" class="mygeda">
             <img src="img/mbleow.png">
-            我的歌单（
-            <div id="gnum" class="gnum">
-                1
-            </div>
-            ）
+            我的歌单
+            <!--<div id="gnum" class="gnum">-->
+                <!--1-->
+            <!--</div>-->
+
         </div>
         <ul id="gul">
-            <li class="ongblock">
-                <div id="gblock" class="gblock clearFloat">
-                    <img src="" >
-                    <div id="gbname" class="gbname">我喜欢的音乐</div>
-                    <!--<div id="gbnum" class="gbnum">1首</div>-->
-                </div>
-            </li>
+            <!--<li class="ongblock">-->
+                <!--<div id="gblock" class="gblock clearFloat">-->
+                    <!--<img src="" class="gimg">-->
+                    <!--<div id="gbname" class="gbname">我喜欢的音乐</div>-->
+                    <!--&lt;!&ndash;<div id="gbnum" class="gbnum">1首</div>&ndash;&gt;-->
+                <!--</div>-->
+            <!--</li>-->
         </ul>
     </div>
     <div id="main" class="main clearFloat">
@@ -66,35 +88,35 @@
             </thead>
         </table>
         <table id="rlist" class="rlist">
-            <tr>
-                <th>
-                    <div class="r1">
-                        <span>1</span>
-                        <img src="img/mplay.png">
-                    </div>
+            <!--<tr>-->
+                <!--<th>-->
+                    <!--<div class="r1">-->
+                        <!--<span>1</span>-->
+                        <!--<img src="img/mplay-b.png">-->
+                    <!--</div>-->
 
-                </th>
-                <th>
-                    <div class="r2">
-                        dfsdfsdf
-                    </div>
-                </th>
-                <th>
-                    <div class="r3">
-                        03:00
-                    </div>
-                </th>
-                <th>
-                    <div class="r4">
-                        fsdfsdf
-                    </div>
-                </th>
-                <th>
-                    <div class="r5">
-                        sdfsdfsddfsdfs
-                    </div>
-                </th>
-            </tr>
+                <!--</th>-->
+                <!--<th>-->
+                    <!--<div class="r2">-->
+                        <!--dfsdfsdf-->
+                    <!--</div>-->
+                <!--</th>-->
+                <!--<th>-->
+                    <!--<div class="r3">-->
+                        <!--03:00-->
+                    <!--</div>-->
+                <!--</th>-->
+                <!--<th>-->
+                    <!--<div class="r4">-->
+                        <!--fsdfsdf-->
+                    <!--</div>-->
+                <!--</th>-->
+                <!--<th>-->
+                    <!--<div class="r5">-->
+                        <!--sdfsdfsddfsdfs-->
+                    <!--</div>-->
+                <!--</th>-->
+            <!--</tr>-->
         </table>
     </div>
 </div>
@@ -107,10 +129,10 @@
         </div>
         <img src="" id="mpic" class="mpic">
         <div id="nameGroup" class="nameGroup">
-            <div id="ngname" class="ngname">dsfsdfsd</div>
-            <span id="ngspan">dsfsdf</span>
+            <div id="ngname" class="ngname">--/--</div>
+            <span id="ngspan">--/--</span>
         </div>
-        <div class="progress" id="progress">
+        <div class="progress" id="progress">`
             <div class="bar" id="progressBar"></div>
             <img src="img/manniu.png" id="pbtn" class="pbtn">
         </div>
@@ -127,9 +149,10 @@
         </div>
     </div>
 </div>
-</body>
+<script src="js/head.js"></script>
 <script src="js/jquery-2.1.1.min.js"></script>
 <script src="js/music.js"></script>
+</body>
 <script>
 
 </script>

@@ -12,15 +12,21 @@ router.get('/musicView', function (req, res, next) {
 })
 router.get('/videoView', function (req, res, next) {
   var vId = req.query.vId
-  var uId = req.query.uId
+  var uId = req.session.uId
   console.log(vId)
   console.log(uId)
 
-  res.render('video',{ u_id: uId,v_id: vId})
+  res.render('video',{ uId: uId,vId: vId})
 })
 router.get('/myVideoView', function (req, res, next) {
+  req.session.uId = req.query.uId
+  console.log(req.session.uId)
   // res.type('html')
-  res.render('myVideo')
+  res.render('myVideo',{ uId: req.session.uId})
+})
+router.get('/login', function (req, res, next) {
+  // res.type('html')
+  res.render('login')
 })
 
 router.get('/viewTest', function (req, res, next) {

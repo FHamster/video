@@ -10,7 +10,7 @@ router.post('/auth', (req, res) => {
   //但是let对变量的安全要求更高建议使用let
   let data = req.body
   console.log(data)
-  let uId = req.body.uId
+  let uId = req.body.userId
   let psw = req.body.psw
   //这边这个是字符串模板的符号，在键盘左上角 就是括号里这个（`）
   let sql = `select * from user where u_id = '${uId}' and u_psw = '${psw}'`
@@ -40,7 +40,8 @@ router.post('/auth', (req, res) => {
       // res.redirect('https://www.baidu.com/')
       //认证成功
       //返回json对象给前台
-      res.json({ state: true, message: '用户认证通过' })
+      res.json({ state: true, message: '用户认证通过', u_id: uId })
+
     } else {
       //认证失败
       res.json({ state: false, message: '用户认证未能通过' })

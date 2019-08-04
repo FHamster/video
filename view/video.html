@@ -1,20 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 <head>
-    <link rel="shortcut icon" href="#" />
     <meta charset="UTF-8">
-    <title>asd</title>
+    <title>播放器</title>
     <link rel="stylesheet" href="css/video.css">
-    <script src="js/jquery-2.1.1.min.js"></script>
+    <link rel="stylesheet" href="css/head.css">
 </head>
 <body>
-<%=u_id%>
+<div id="head" class="head">
+    <div class="bar clearFloat">
+        <div id="logo" class="logo">
+            <img src="img/logo.png">
+        </div>
+        <div class="biaoti">
+            <div id="mzhuye" class="text">我的主页</div>
+        </div>
+        <div id="mvideo" class="biaoti">
+            <div class="text">我的视频</div>
+        </div>
+        <div id="mmusic" class="biaoti">
+            <div class="text">我的音乐</div>
+        </div>
+        <div id="loginGroup" class="loginGroup">
+            <div id="loginImg" class="loginImg"></div>
+            <div id="loginName" class="loginName"><span id="user"><%=uId%></span></div>
+        </div>
+    </div>
+</div>
 <div class="main">
 <div class="left clearFloat">
-    <div class="title" id="title">这是视频标题</div>
+    <span id="video_id"><%=vId%></span><div class="title" id="title">这是视频标题</div>
     <div class="video">
         <div class="videoMain">
-            <video id="video" src="" poster="img/video/希儿.png">
+            <video id="video" src="https://media.w3.org/2010/05/sintel/trailer.mp4" poster="img/video/希儿.png">
             </video>
         </div>
         <div class="program" id="program">
@@ -119,5 +137,6 @@
 </div>
 </div>
 </body>
+<script src="js/jquery-2.1.1.min.js"></script>
 <script src="js/video.js"></script>
 </html>
