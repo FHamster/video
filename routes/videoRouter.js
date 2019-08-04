@@ -8,8 +8,7 @@ let MyQuery = require('./MySqlInter')
 router.get('/video/:vId', (req, res) => {
   let vId = req.params.vId
   console.log(vId)
-  res.json(vId)
-  let sql = `select * from video where v_Id = '${v_Id}'`
+  let sql = `select * from video where v_Id = '${vId}'`
   console.log(sql)
 
   //数据库验证
@@ -64,7 +63,7 @@ router.get('/randomvideo', (req, res) => {
   let sql = `
 select *
 from video
-limit 3;`
+limit 5;`
   console.log(sql)
 
   MyQuery(sql, data => {

@@ -26,9 +26,10 @@ window.onload = function () {
             list = []
             list = result;
             var copyList = list.map(function (item, index) {
-                return '<div class="card">\n' +
+                return '<div class="card" onclick="toVideo(this)">\n' +
                     '            <div class="cardChild">\n' +
-                    '                <img src="' + item.v_url + '">\n' +
+                    '                <img src="' + item.v_pre + '">\n' +
+                    '                <div style="display:none" id="id">'+ item.v_id + '</div>\n'  +
                     '                <div class="produce">\n' +
                     '                    <div class="cardTitle">' + item.v_title + '</div>\n' +
                     '                    <div class="cardTime">' + getTime(parseInt(item.v_total_long)) + '</div>\n' +
@@ -47,8 +48,16 @@ window.onload = function () {
     });
 };
 
+//获取视频的 id
+function toVideo (a) {
+    let vId=a.childNodes[1].childNodes[3].innerHTML
+    console.log(vId)
+    let url = `http://localhost:3000/videoview?vId=${vId}`
+    console.log(url)
 
+    window.location.href = url
 
+}
 
 function getTime(t) {
     var mTime = parseInt(t/60);

@@ -11,8 +11,12 @@ router.get('/musicView', function (req, res, next) {
   res.render('music')
 })
 router.get('/videoView', function (req, res, next) {
-  // res.type('html')
-  res.render('video')
+  var vId = req.query.vId
+  var uId = req.query.uId
+  console.log(vId)
+  console.log(uId)
+
+  res.render('video',{ u_id: uId,v_id: vId})
 })
 router.get('/myVideoView', function (req, res, next) {
   // res.type('html')
