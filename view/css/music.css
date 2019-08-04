@@ -69,7 +69,7 @@ body {
     width: 200px;
     height: 200px;
     display: block;
-    border: 1px solid blue;
+    border: 1px solid whitesmoke;
     position: absolute;
 }
 
@@ -228,11 +228,14 @@ body {
     /*background-color: #e6e6e6;*/
 }
 
-.bfq .gedan .gblock {
-
+.bfq .gedan .ongblock {
+    width: 230px;
+    height: 42px;
+    padding: 6px 0 6px 20px;
+    background-color: #e6e6e6;
 }
 
-.bfq .gedan .ongblock img {
+.bfq .gedan  .gimg {
     width: 40px;
     height: 40px;
     float: left;
@@ -246,6 +249,8 @@ body {
     float: left;
     color: #000;
     margin: 2px 0px 6px;
+    max-width: 140px;
+    text-overflow: ellipsis;
 }
 
 .bfq .gedan .gblock .gbnum {
@@ -270,6 +275,7 @@ body {
 .bfq .mlist .rlist .r1 {
     width: 54px;
     padding: 6px 10px;
+    margin-top: -5px;
 }
 
 .bfq .mlist .rlist .r1 span {
@@ -289,7 +295,9 @@ body {
 .bfq .mlist .rlist .r2 {
     width: 305px;
     padding: 6px 10px;
+    font-size: 12px;
     text-align: left;
+    white-space: nowrap;
     text-overflow: ellipsis;
 }
 
@@ -297,6 +305,8 @@ body {
     width: 120px;
     padding: 6px 10px;
     text-align: left;
+    font-size: 12px;
+    white-space: nowrap;
     text-overflow: ellipsis;
 }
 
@@ -304,6 +314,8 @@ body {
     width: 105px;
     padding: 6px 10px;
     text-align: left;
+    font-size: 12px;
+    white-space: nowrap;
     text-overflow: ellipsis;
 }
 
@@ -311,7 +323,10 @@ body {
     padding: 6px 10px;
     text-align: left;
     overflow: hidden;
+    font-size: 12px;
+    white-space: nowrap;
     text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .control {

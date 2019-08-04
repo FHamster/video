@@ -1,7 +1,7 @@
 var audio = document.getElementById('audio');
 var play = document.getElementById('play');
 var bfq = document.getElementById('bfq');
-// var gnum = document.getElementById('gum');
+var gnum = document.getElementById('gum');
 var gul = document.getElementById('gul');
 var main = document.getElementById('main');
 var pic = document.getElementById('pic');
@@ -38,7 +38,7 @@ var mlist = [
         singer:'KillerBlood',//歌手
         from:'Cytus-Prologue-',//专辑
         purl:'http://p2.music.126.net/753pgNXuQ93-Bakdzbqryw==/2489294325303322.jpg?param=177y177',//专辑图片路径
-        murl:'http://music.163.com/song/media/outer/url?id= 4916191.mp3 ',//歌曲路径
+        murl:'http://music.163.com/song/media/outer/url?id=476592630.mp3',//歌曲路径
     },{
         name: 'tief=blau',//歌曲名,
         time:'04:03',//时长
@@ -78,12 +78,16 @@ var gdlist = [
         url:'http://p2.music.126.net/dmqfLxjTvVjzyTxMASvL4A==/61572651156176.jpg?param=177y177',//图片路径
     },{
         index:'3',
-        name:'THE IDOLM@STER MILLION LIVE! M@STER SPARKLE 05',//名字
+        name:'THE IDOLM@STER ',//名字
         url:'http://p2.music.126.net/2Ckgr-MI7NrvfqcDr3iUkQ==/109951163104652897.jpg?param=177y177',//图片路径
     }
 ];
+
+// var mlist = [];
+// var gdlist = [];
 var nowIndex = 0;
 var uid = '001';
+var gIndex = 0;
 
 
 simg.onclick = function () {
@@ -93,7 +97,6 @@ simg.onclick = function () {
         audio.volume = 0;
         volbar.style.width = '0';
     }else{
-        console.log(1);
         simg.src ='img/msound.png';
         isSound = false;
         false// audio.volume = 0.3;
@@ -124,7 +127,7 @@ vol.onclick = function (e) {
 }
 
 progress.onclick = function (e) {
-    console.log(e.clientX + " " + progress.offsetLeft + " " + progress.clientWidth);
+    // console.log(e.clientX + " " + progress.offsetLeft + " " + progress.clientWidth);
     var cha = e.clientX - progress.offsetLeft;
     progressbar.style.width = cha / progress.clientWidth * 100 + '%';
     audio.currentTime = audio.duration * cha / progress.clientWidth;
@@ -189,10 +192,7 @@ pre.onclick = function () {
     }
 
     if(mlist.length){
-        audio.src = mlist[nowIndex].murl;
-        ngname.innerText = mlist[nowIndex].name;
-        ngspan.innerText = mlist[nowIndex].singer;
-        audio.play();
+        setAudio(nowIndex);
     }
 }
 
@@ -200,20 +200,14 @@ next.onclick = function () {
     if(mlist.length){
         nowIndex ++;
         nowIndex %= mlist.length;
-        audio.src = mlist[nowIndex].murl;
-        ngname.innerText = mlist[nowIndex].name;
-        ngspan.innerText = mlist[nowIndex].singer;
-        audio.play();
+        setAudio(nowIndex);
     }
 }
 
 playbtn.onclick = function () {
     if(mlist.length){
         nowIndex = 0;
-        audio.src = mlist[nowIndex].murl;
-        ngname.innerText = mlist[nowIndex].name;
-        ngspan.innerText = mlist[nowIndex].singer;
-        audio.play();
+        setAudio(nowIndex);
     }else{
         alert('当前歌单无歌曲');
     }
@@ -241,20 +235,78 @@ function getGe(){
     })
 }
 
+function choose(index) {
+    pic.style.backgroundImage = 'url(' + gdlist[index].url + ')';
+    te.innerHTML = gdlist[index].name;
+    showGedan();
+}
+
 function showGedan() {
     var copyList = gdlist.map(function (item,index) {
-        return `<li onclick=choose(${index})" class="${index == nowIndex?'ongblock':''}">
+        return `<li onclick="choose(${index})" class="${index == nowIndex?'ongblock':''}">
                 <div  class="gblock clearFloat">
-                <img src="${item.url}">
+                <img src="${item.url}" class="gimg">
                 <div  class="gbname">${item.name}</div>
                 </div>
                 </li>`
     })
-
     gul.innerHTML = copyList.join('');
 }
 
+function bofang(index) {
+    setAudio(index);
+}
+
+function showMlist() {
+    var copyList = mlist.map(function (item,index) {
+        return `<tr>
+                <th>
+                    <div class="r1">
+                        <span>${index + 1}</span>
+                        <img src="${index != nowIndex?'img/mplay-b.png':'img/mplay-r.png'}" onclick="bofang(${index})">
+                    </div>
+
+                </th>
+                <th>
+                    <div class="r2">
+                        ${item.name}
+                    </div>
+                </th>
+                <th>
+                    <div class="r3">
+                        ${item.time}
+                    </div>
+                </th>
+                <th>
+                    <div class="r4">
+                        ${item.singer}
+                    </div>
+                </th>
+                <th>
+                    <div class="r5">
+                        ${item.from}
+                    </div>
+                </th>
+            </tr>`
+    })
+    mnum.innerText = mlist.length + '首歌';
+    rlist.innerHTML = copyList.join('');
+    
+}
+
+function setAudio(index){
+    audio.src = mlist[index].murl;
+    mpic.src = mlist[index].purl;
+    ngname.innerText = mlist[index].name;
+    ngspan.innerText = mlist[index].singer;
+    play.src = 'img/mpause.png';
+    isPlay = false;
+    audio.play();
+}
+
 window.onload = function () {
-    // getGe();
+     //getGe();
     showGedan();
+    choose(0);
+    showMlist();
 }
