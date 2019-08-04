@@ -1,0 +1,107 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: #F5F5F5;
+}
+
+.clearFloat::after {
+    content: '';
+    height: 0;
+    display: block;
+    clear: both;
+    visibility: hidden;
+}
+
+.clearFloat {
+    zoom: 1;
+}
+
+.top{
+    height: 200px;
+    width: 1000px;
+    margin: auto auto;
+    overflow: hidden;
+}
+
+.top img{
+    width: 1000px;
+     margin-top: -140px;
+}
+
+.main{
+    width: 1000px;
+    height: 750px;
+    margin: 30px auto;
+    /*border: black solid 1px;*/
+    background-color: white;
+}
+
+.main .title{
+    width: 200px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 20px;
+    /*border: red solid 1px;*/
+    padding: 0 0 0 10px;
+}
+
+
+
+.main .cards .card{
+    display: block;
+    float: left;
+    width: 290px;
+    height: 200px;
+    /*border: green solid 1px;*/
+    margin: 10px 21px;
+    background-color: #F1F1F1;
+}
+.main .cards .card:hover{
+    margin: auto;
+    width: 332px;
+    height: 220px;
+}
+.main .cards .card .cardChild{
+    width: 288px;
+    height: 200px;
+    margin: auto;
+}
+.main .cards .card .cardChild:hover{
+    border: 1px solid #F5F5F5;
+    width: 330px;
+    cursor: pointer;
+}
+.main .cards .card .cardChild:hover img{
+    width: 330px;
+    height: 180px;
+}
+.main .cards .card .cardChild img{
+    width: 288px;
+    height: 162px;
+}
+
+.main .cards .card .produce{
+    height: 32px;
+    /*margin: 3px auto 0;*/
+    /*border: blue solid 1px;*/
+}
+
+.main .cards .card .produce .cardTitle{
+    display: block;
+    float: left;
+    margin-left: 10px;
+    line-height: 32px;
+    width: 70%;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.main .cards .card .produce .cardTime{
+    float: right;
+    line-height: 32px;
+    width: 20%;
+}
