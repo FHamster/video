@@ -170,16 +170,17 @@ next.onclick = function () {
     }
 }
 
-function getHeadUrl(){
-    let str =`http://127.0.0.1:3000/api/user/${uid}`;
+
+function getGe(){
+    let str =`http://127.0.0.1:3000/api//apiTest/gdlist`;
     console.log(str);
     $.ajax({
         type:'GET',
         contentType: 'application/json;charset=UTF-8',
         url:str,
-        data:{
-            uId:uid
-        },
+        // data:{
+        //     uId:uid
+        // },
         // dataType: "json",
         success: function (res) {
             console.log(res)
@@ -195,4 +196,8 @@ function getHeadUrl(){
 function showGedan() {
 
 
+}
+
+window.onload = function () {
+    getGe();
 }
