@@ -423,7 +423,7 @@ body {
 }
 
 .control .controlbar .progress .bar {
-    width: 0;
+    width: 0%;
     height: 9px;
     background-color: #ee8c49;
     border-radius: 5px;

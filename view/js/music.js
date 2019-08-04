@@ -28,40 +28,41 @@ var vol = document.getElementById('vol');
 var volbar = document.getElementById('volbar');
 var bimg = document.getElementById('bimg');
 
+var markNum = 0;
 var isSound = false;
 var isSingle = false;
 var isPlay = false;
-var mlist = [
-    {
-        name:'The Black Case',//歌曲名,
-        time:'01:42',//时长
-        singer:'KillerBlood',//歌手
-        from:'Cytus-Prologue-',//专辑
-        purl:'http://p2.music.126.net/753pgNXuQ93-Bakdzbqryw==/2489294325303322.jpg?param=177y177',//专辑图片路径
-        murl:'http://music.163.com/song/media/outer/url?id=476592630.mp3',//歌曲路径
-    },{
-        name: 'tief=blau',//歌曲名,
-        time:'04:03',//时长
-        singer:'Foxtail-Grass Studio',//歌手
-        from:'monocolotion',//专辑
-        purl:'http://p2.music.126.net/JIDe8pSNjYcXi5g6TbB1pQ==/5746047766839678.jpg?param=177y177',//专辑图片路径
-        murl:'http://music.163.com/song/media/outer/url?id= 27669791.mp3 ',//歌曲路径
-    },{
-        name: '意难忘',//歌曲名,
-        time:'04:28',//时长
-        singer:'蔡小虎',//歌手
-        from:'思相枝',//专辑
-        purl:'http://p2.music.126.net/dmqfLxjTvVjzyTxMASvL4A==/61572651156176.jpg?param=177y177',//专辑图片路径
-        murl:'http://music.163.com/song/media/outer/url?id= 68968.mp3 ',//歌曲路径
-    }, {
-        name: 'はなしらべ',//歌曲名,
-        time:'05:20',//时长
-        singer:'郁原ゆう',//歌手
-        from:'THE IDOLM@STER MILLION LIVE! M@STER SPARKLE 05',//专辑
-        purl:'http://p2.music.126.net/2Ckgr-MI7NrvfqcDr3iUkQ==/109951163104652897.jpg?param=177y177',//专辑图片路径
-        murl:'[图片]http://music.163.com/song/media/outer/url?id= 37176242.mp3 ',//歌曲路径
-    }
-];
+// var mlist = [
+//     {
+//         name:'The Black Case',//歌曲名,
+//         time:'01:42',//时长
+//         singer:'KillerBlood',//歌手
+//         from:'Cytus-Prologue-',//专辑
+//         purl:'http://p2.music.126.net/753pgNXuQ93-Bakdzbqryw==/2489294325303322.jpg?param=177y177',//专辑图片路径
+//         murl:'http://music.163.com/song/media/outer/url?id=476592630.mp3',//歌曲路径
+//     },{
+//         name: 'tief=blau',//歌曲名,
+//         time:'04:03',//时长
+//         singer:'Foxtail-Grass Studio',//歌手
+//         from:'monocolotion',//专辑
+//         purl:'http://p2.music.126.net/JIDe8pSNjYcXi5g6TbB1pQ==/5746047766839678.jpg?param=177y177',//专辑图片路径
+//         murl:'http://music.163.com/song/media/outer/url?id= 27669791.mp3 ',//歌曲路径
+//     },{
+//         name: '意难忘',//歌曲名,
+//         time:'04:28',//时长
+//         singer:'蔡小虎',//歌手
+//         from:'思相枝',//专辑
+//         purl:'http://p2.music.126.net/dmqfLxjTvVjzyTxMASvL4A==/61572651156176.jpg?param=177y177',//专辑图片路径
+//         murl:'http://music.163.com/song/media/outer/url?id= 68968.mp3 ',//歌曲路径
+//     }, {
+//         name: 'はなしらべ',//歌曲名,
+//         time:'05:20',//时长
+//         singer:'郁原ゆう',//歌手
+//         from:'THE IDOLM@STER MILLION LIVE! M@STER SPARKLE 05',//专辑
+//         purl:'http://p2.music.126.net/2Ckgr-MI7NrvfqcDr3iUkQ==/109951163104652897.jpg?param=177y177',//专辑图片路径
+//         murl:'[图片]http://music.163.com/song/media/outer/url?id= 37176242.mp3 ',//歌曲路径
+//     }
+// ];
 // var gdlist = [
 //     {
 //         index:'12345678',
@@ -83,7 +84,7 @@ var mlist = [
 //     }
 // ];
 
-// var mlist = [];
+var mlist = [];
 var gdlist = [];
 var nowIndex = 0;
 var uid = '001';
@@ -224,24 +225,19 @@ playbtn.onclick = function () {
 
 function getGe(){
     let str = `http://127.0.0.1:3000/api/mmark?uId=${'001'}`
-    console.log(str);
+    // console.log(str);
     $.ajax({
         type:'GET',
         contentType: 'application/json;charset=UTF-8',
         url:str,
-        // data:{
-        //     uId:uid
-        // },
-        // dataType: "json",
         success: function (res) {
-            console.log(res);
+            // console.log(res);
             for(let i = 0; i < res.length; i++){
                 gdlist.push({name:res[i].folder_name,url:res[i].mmark_url});
             }
             console.log(gdlist);
             showGedan();
-            choose(1);
-            showMlist();
+            choose(0);
         },
         //请求失败回调函数
         error: function (e) {
@@ -251,7 +247,37 @@ function getGe(){
     })
 }
 
-// ${index == nowIndex?'ongblock':''}
+function getMlist() {
+    let str = `http://127.0.0.1:3000/api/queryMusic?uId=${'001'}&folderName=${gdlist[markNum].name}`
+    $.ajax({
+        type:'GET',
+        contentType: 'application/json;charset=UTF-8',
+        url:str,
+        success: function (res) {
+            console.log(res);
+            mlist = [];
+            //name time singer time
+            for(let i = 0; i < res.length; i ++){
+                mlist.push({
+                    name : res[i].folder_name,
+                    time : res[i].m_total_long,
+                    singer: res[i].m_artist,
+                    from: res[i].m_album,
+                    purl: res[i].m_album_url,
+                    murl: res[i].m_url
+                })
+            }
+            console.log(mlist);
+            showMlist();
+        },
+        //请求失败回调函数
+        error: function (e) {
+            console.log(e.status)
+            console.log(e.responseText)
+        }
+    })
+
+}
 
 function showGedan() {
     var copyList = gdlist.map(function (item,index) {
@@ -266,15 +292,18 @@ function showGedan() {
 }
 
 function choose(index) {
-    console.log(index);
+    // console.log(index);
+    markNum == index;
     pic.style.backgroundImage = 'url(' + gdlist[index].url + ')';
     te.innerHTML = gdlist[index].name;
     showGedan();
+    getMlist();
 }
 
 function showMlist() {
-    var copyList = mlist.map(function (item,index) {
-        return `<tr>
+    if(mlist.length){
+        var copyList = mlist.map(function (item,index) {
+            return `<tr>
                 <th>
                     <div class="r1">
                         <span>${index + 1}</span>
@@ -303,9 +332,10 @@ function showMlist() {
                     </div>
                 </th>
             </tr>`
-    })
-    mnum.innerText = mlist.length + '首歌';
-    rlist.innerHTML = copyList.join('');
+        })
+        mnum.innerText = mlist.length + '首歌';
+        rlist.innerHTML = copyList.join('');
+    }
 
 }
 
@@ -330,5 +360,4 @@ function setAudio(index){
 
 window.onload = function () {
     getGe();
-
 }
