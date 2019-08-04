@@ -171,6 +171,7 @@ next.onclick = function () {
 }
 
 
+
 function getGe(){
     let str =`http://127.0.0.1:3000/api//apiTest/gdlist`;
     console.log(str);
