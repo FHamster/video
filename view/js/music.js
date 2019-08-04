@@ -62,29 +62,29 @@ var mlist = [
         murl:'[图片]http://music.163.com/song/media/outer/url?id= 37176242.mp3 ',//歌曲路径
     }
 ];
-var gdlist = [
-    {
-        index:'12345678',
-        name:'Cytus-Prologue-',//名字
-        num:'35',//歌曲数量
-        url:'http://p2.music.126.net/753pgNXuQ93-Bakdzbqryw==/2489294325303322.jpg?param=177y177',//图片路径
-    }, {
-        index:'2',
-        name:'monocolotion',//名字
-        url:'http://p2.music.126.net/JIDe8pSNjYcXi5g6TbB1pQ==/5746047766839678.jpg?param=177y177',//图片路径
-    },{
-        index:'1',
-        name:'思相枝',//名字
-        url:'http://p2.music.126.net/dmqfLxjTvVjzyTxMASvL4A==/61572651156176.jpg?param=177y177',//图片路径
-    },{
-        index:'3',
-        name:'THE IDOLM@STER ',//名字
-        url:'http://p2.music.126.net/2Ckgr-MI7NrvfqcDr3iUkQ==/109951163104652897.jpg?param=177y177',//图片路径
-    }
-];
+// var gdlist = [
+//     {
+//         index:'12345678',
+//         name:'Cytus-Prologue-',//名字
+//         num:'35',//歌曲数量
+//         url:'http://p2.music.126.net/753pgNXuQ93-Bakdzbqryw==/2489294325303322.jpg?param=177y177',//图片路径
+//     }, {
+//         index:'2',
+//         name:'monocolotion',//名字
+//         url:'http://p2.music.126.net/JIDe8pSNjYcXi5g6TbB1pQ==/5746047766839678.jpg?param=177y177',//图片路径
+//     },{
+//         index:'1',
+//         name:'思相枝',//名字
+//         url:'http://p2.music.126.net/dmqfLxjTvVjzyTxMASvL4A==/61572651156176.jpg?param=177y177',//图片路径
+//     },{
+//         index:'3',
+//         name:'THE IDOLM@STER ',//名字
+//         url:'http://p2.music.126.net/2Ckgr-MI7NrvfqcDr3iUkQ==/109951163104652897.jpg?param=177y177',//图片路径
+//     }
+// ];
 
 // var mlist = [];
-// var gdlist = [];
+var gdlist = [];
 var nowIndex = 0;
 var uid = '001';
 var gIndex = 0;
@@ -224,7 +224,7 @@ playbtn.onclick = function () {
 }
 
 function getGe(){
-    let str =`http://127.0.0.1:3000/api//apiTest/gdlist`;
+    let str =`http://127.0.0.1:3000/api/apiTest`;
     console.log(str);
     $.ajax({
         type:'GET',
@@ -235,7 +235,18 @@ function getGe(){
         // },
         // dataType: "json",
         success: function (res) {
-            console.log(res)
+            console.log(res);
+            // gdlist = res.data.map(function (item,index) {
+            //     return {
+            //         // index:index,
+            //         name:item.folder_name,
+            //         url:item.mmark_url
+            //     }
+            // })
+            for(let i = 0; i < res.length; i++){
+                gdlist.push({name:res[i].name,url:res[i].url});
+            }
+            console.log(gdlist);
         },
         //请求失败回调函数
         error: function (e) {
@@ -243,12 +254,6 @@ function getGe(){
             console.log(e.responseText)
         }
     })
-}
-
-function choose(index) {
-    pic.style.backgroundImage = 'url(' + gdlist[index].url + ')';
-    te.innerHTML = gdlist[index].name;
-    showGedan();
 }
 
 // ${index == nowIndex?'ongblock':''}
@@ -263,6 +268,12 @@ function showGedan() {
                 </li>`
     })
     gul.innerHTML = copyList.join('');
+}
+
+function choose(index) {
+    pic.style.backgroundImage = 'url(' + gdlist[index].url + ')';
+    te.innerHTML = gdlist[index].name;
+    showGedan();
 }
 
 function showMlist() {
@@ -322,7 +333,7 @@ function setAudio(index){
 }
 
 window.onload = function () {
-     //getGe();
+    getGe();
     showGedan();
     choose(0);
     showMlist();
