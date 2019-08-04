@@ -11,8 +11,7 @@ var markRouter = require('./routes/markRouter')
 var musicMarkRouter = require('./routes/musicMarkRouter')
 var musicRouter = require('./routes/musicRouter')
 var videoRouter = require('./routes/videoRouter')
-var ejs = require('ejs');  //我是新引入的ejs插件
-
+var ejs = require('ejs');
 
 var app = express()
 //设置允许跨域访问该服务.
