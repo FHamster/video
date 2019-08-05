@@ -1,37 +1,37 @@
-var audio = document.getElementById('audio');
-var play = document.getElementById('play');
-var bfq = document.getElementById('bfq');
+var audio = document.getElementById('audio')
+var play = document.getElementById('play')
+var bfq = document.getElementById('bfq')
 // var gnum = document.getElementById('gum');
-var gul = document.getElementById('gul');
-var main = document.getElementById('main');
-var pic = document.getElementById('pic');
-var te = document.getElementById('te');
-var uimg = document.getElementById('uimg');
-var uname = document.getElementById('uname');
-var playbtn = document.getElementById('playbtn');
-var mnum = document.getElementById('mnum');
-var rlist = document.getElementById('rlist');
-var controlbar = document.getElementById('controlbar');
-var btnGrop =  document.getElementById('btnGroup');
-var pre = document.getElementById('pre');
-var next = document.getElementById('next');
-var mpic = document.getElementById('mpic');
-var ngname = document.getElementById('ngname');
-var ngspan = document.getElementById('ngspan');
-var progress = document.getElementById('progress');
-var pbtn = document.getElementById('pbtn');
-var progressbar = document.getElementById('progressBar');
-var nowTime = document.getElementById('nowTime');
-var endTime = document.getElementById('endTime');
-var simg = document.getElementById('simg');
-var vol = document.getElementById('vol');
-var volbar = document.getElementById('volbar');
-var bimg = document.getElementById('bimg');
+var gul = document.getElementById('gul')
+var main = document.getElementById('main')
+var pic = document.getElementById('pic')
+var te = document.getElementById('te')
+var uimg = document.getElementById('uimg')
+var uname = document.getElementById('uname')
+var playbtn = document.getElementById('playbtn')
+var mnum = document.getElementById('mnum')
+var rlist = document.getElementById('rlist')
+var controlbar = document.getElementById('controlbar')
+var btnGrop = document.getElementById('btnGroup')
+var pre = document.getElementById('pre')
+var next = document.getElementById('next')
+var mpic = document.getElementById('mpic')
+var ngname = document.getElementById('ngname')
+var ngspan = document.getElementById('ngspan')
+var progress = document.getElementById('progress')
+var pbtn = document.getElementById('pbtn')
+var progressbar = document.getElementById('progressBar')
+var nowTime = document.getElementById('nowTime')
+var endTime = document.getElementById('endTime')
+var simg = document.getElementById('simg')
+var vol = document.getElementById('vol')
+var volbar = document.getElementById('volbar')
+var bimg = document.getElementById('bimg')
 
-var markNum = 0;
-var isSound = false;
-var isSingle = false;
-var isPlay = false;
+var markNum = 0
+var isSound = false
+var isSingle = false
+var isPlay = false
 // var mlist = [
 //     {
 //         name:'The Black Case',//歌曲名,
@@ -84,232 +84,230 @@ var isPlay = false;
 //     }
 // ];
 
-var mlist = [];
-var gdlist = [];
-var nowIndex = 0;
-var uid = '001';
+var mlist = []
+var gdlist = []
+var nowIndex = 0
 
+var uid = document.getElementById('user').innerHTML
 
 simg.onclick = function () {
-    if(!isSound){
-        simg.src='img/mjingyin.png';
-        isSound = true;
-        audio.volume = 0;
-        volbar.style.width = '0';
-    }else{
-        simg.src ='img/msound.png';
-        isSound = false;
-        false// audio.volume = 0.3;
-        volbar.style.width = '30%';
-    }
+  if (!isSound) {
+    simg.src = 'img/mjingyin.png'
+    isSound = true
+    audio.volume = 0
+    volbar.style.width = '0'
+  } else {
+    simg.src = 'img/msound.png'
+    isSound = false
+    false// audio.volume = 0.3;
+    volbar.style.width = '30%'
+  }
 }
 
 bimg.onclick = function () {
-    if(!isSingle){
-        bimg.src = 'img/mdanqu.png';
-        isSingle = true
-    }else {
-        bimg.src = 'img/mshunxu.png';
-        isSingle = false;
-    }
+  if (!isSingle) {
+    bimg.src = 'img/mdanqu.png'
+    isSingle = true
+  } else {
+    bimg.src = 'img/mshunxu.png'
+    isSingle = false
+  }
 }
 
 vol.onclick = function (e) {
-    var cha = e.clientX - vol.offsetLeft;
-    volbar.style.width = cha / vol.clientWidth * 100 + '%';
-    audio.volume = cha / vol.clientWidth;
-    if(audio.volume > 0.05){
-        simg.src ='img/msound.png';
-    }
-    else {
-        simg.src='img/mjingyin.png';
-    }
+  var cha = e.clientX - vol.offsetLeft
+  volbar.style.width = cha / vol.clientWidth * 100 + '%'
+  audio.volume = cha / vol.clientWidth
+  if (audio.volume > 0.05) {
+    simg.src = 'img/msound.png'
+  } else {
+    simg.src = 'img/mjingyin.png'
+  }
 }
 
 progress.onclick = function (e) {
-    // console.log(e.clientX + " " + progress.offsetLeft + " " + progress.clientWidth);
-    var cha = e.clientX - progress.offsetLeft;
-    progressbar.style.width = cha / progress.clientWidth * 100 + '%';
-    audio.currentTime = audio.duration * cha / progress.clientWidth;
-    var pos = -10 + cha / progress.clientWidth * 500 -5;
-    if(pos > -10){
-        pbtn.style.marginLeft = pos + 'px';
-    }else {
-        pbtn.style.marginLeft = -9 + 'px';
-    }
+  // console.log(e.clientX + " " + progress.offsetLeft + " " + progress.clientWidth);
+  var cha = e.clientX - progress.offsetLeft
+  progressbar.style.width = cha / progress.clientWidth * 100 + '%'
+  audio.currentTime = audio.duration * cha / progress.clientWidth
+  var pos = -10 + cha / progress.clientWidth * 500 - 5
+  if (pos > -10) {
+    pbtn.style.marginLeft = pos + 'px'
+  } else {
+    pbtn.style.marginLeft = -9 + 'px'
+  }
 }
 
-function toTime(t) {
-    var m = parseInt(t / 60);
-    var s = parseInt(t % 60);
-    if (m < 10) {
-        m = '0' + m;
-    }
-    if (s < 10) {
-        s = '0' + s;
-    }
-    return m + ':' + s;
+function toTime (t) {
+  var m = parseInt(t / 60)
+  var s = parseInt(t % 60)
+  if (m < 10) {
+    m = '0' + m
+  }
+  if (s < 10) {
+    s = '0' + s
+  }
+  return m + ':' + s
 }
 
 audio.addEventListener('timeupdate', function () {
-    nowTime.innerText = toTime(audio.currentTime);
-    endTime.innerText = '/'  + toTime(audio.duration);
-    progressBar.style.width = audio.currentTime / audio.duration * 100 + '%';
-    var pos = -10 + audio.currentTime / audio.duration * 500 -5;
-    if(pos > -13){
-        pbtn.style.marginLeft = pos + 'px';
-    }else {
-        pbtn.style.marginLeft = -12 + 'px';
-    }
+  nowTime.innerText = toTime(audio.currentTime)
+  endTime.innerText = '/' + toTime(audio.duration)
+  progressBar.style.width = audio.currentTime / audio.duration * 100 + '%'
+  var pos = -10 + audio.currentTime / audio.duration * 500 - 5
+  if (pos > -13) {
+    pbtn.style.marginLeft = pos + 'px'
+  } else {
+    pbtn.style.marginLeft = -12 + 'px'
+  }
 
 })
 
 audio.addEventListener('ended', function () {
-    if(!isSingle){
-        nex();
-    }else{
-        audio.play();
-    }
+  if (!isSingle) {
+    nex()
+  } else {
+    audio.play()
+  }
 })
 
 var waitTime = setTimeout(function () {
-    //判断当前加载情况
-    if (audio.readyState > 2) {
-        endTime.innerText = '/'  + toTime(audio.duration);
-        clearTimeout(waitTime);
-    }
-}, 1000);
-
-
+  //判断当前加载情况
+  if (audio.readyState > 2) {
+    endTime.innerText = '/' + toTime(audio.duration)
+    clearTimeout(waitTime)
+  }
+}, 1000)
 
 play.onclick = function () {
-    if (!isPlay) {
-        play.src = 'img/mpause.png';
-        audio.play();
-        isPlay = true;
-    } else {
-        play.src = 'img/mplay-w.png';
-        audio.pause();
-        isPlay = false;
-    }
+  if (!isPlay) {
+    play.src = 'img/mpause.png'
+    audio.play()
+    isPlay = true
+  } else {
+    play.src = 'img/mplay-w.png'
+    audio.pause()
+    isPlay = false
+  }
 }
 
 pre.onclick = function () {
-    nowIndex --;
-    if(nowIndex < 0){
-        nowIndex = mlist.length - 1;
-    }
+  nowIndex--
+  if (nowIndex < 0) {
+    nowIndex = mlist.length - 1
+  }
 
-    if(mlist.length){
-        setAudio(nowIndex);
-    }
+  if (mlist.length) {
+    setAudio(nowIndex)
+  }
 }
 
-next.onclick = nex;
+next.onclick = nex
 
-function nex() {
-    if(mlist.length){
-        nowIndex ++;
-        nowIndex %= mlist.length;
-        setAudio(nowIndex);
-    }
+function nex () {
+  if (mlist.length) {
+    nowIndex++
+    nowIndex %= mlist.length
+    setAudio(nowIndex)
+  }
 }
 
 playbtn.onclick = function () {
-    if(mlist.length){
-        nowIndex = 0;
-        setAudio(nowIndex);
-    }else{
-        alert('当前歌单无歌曲');
+  if (mlist.length) {
+    nowIndex = 0
+    setAudio(nowIndex)
+  } else {
+    alert('当前歌单无歌曲')
+  }
+}
+
+function getGe () {
+  console.log('uid:'+uid)
+  let str = `http://127.0.0.1:3000/api/mmark?uId=${uid}`
+  // console.log(str);
+  $.ajax({
+    type: 'GET',
+    contentType: 'application/json;charset=UTF-8',
+    url: str,
+    success: function (res) {
+      // console.log(res);
+      gdlist = []
+      for (let i = 0; i < res.length; i++) {
+        gdlist.push({ name: res[i].folder_name, url: res[i].mmark_url })
+      }
+      // console.log(gdlist);
+      showGedan()
+      choose(0)
+    },
+    //请求失败回调函数
+    error: function (e) {
+      console.log(e.status)
+      console.log(e.responseText)
     }
+  })
 }
 
-function getGe(){
-    let str = `http://127.0.0.1:3000/api/mmark?uId=${uid}`
-    // console.log(str);
-    $.ajax({
-        type:'GET',
-        contentType: 'application/json;charset=UTF-8',
-        url:str,
-        success: function (res) {
-            // console.log(res);
-            gdlist = [];
-            for(let i = 0; i < res.length; i++){
-                gdlist.push({name:res[i].folder_name,url:res[i].mmark_url});
-            }
-            // console.log(gdlist);
-            showGedan();
-            choose(0);
-        },
-        //请求失败回调函数
-        error: function (e) {
-            console.log(e.status)
-            console.log(e.responseText)
-        }
-    })
-}
-
-function getMlist() {
-    let str = `http://127.0.0.1:3000/api/queryMusic?uId=${uid}&folderName=${gdlist[markNum].name}`
-    $.ajax({
-        type:'GET',
-        contentType: 'application/json;charset=UTF-8',
-        url:str,
-        success: function (res) {
-            // console.log(res);
-            mlist = [];
-            //name time singer time
-            for(let i = 0; i < res.length; i ++){
-                mlist.push({
-                    name : res[i].m_album,
-                    time : res[i].m_total_long,
-                    singer: res[i].m_artist,
-                    from: res[i].m_album,
-                    purl: res[i].m_album_url,
-                    murl: res[i].m_url
-                })
-            }
-            // console.log(mlist);
-            showMlist();
-        },
-        //请求失败回调函数
-        error: function (e) {
-            console.log(e.status)
-            console.log(e.responseText)
-        }
-    })
+function getMlist () {
+  let str = `http://127.0.0.1:3000/api/queryMusic?uId=${uid}&folderName=${gdlist[markNum].name}`
+  $.ajax({
+    type: 'GET',
+    contentType: 'application/json;charset=UTF-8',
+    url: str,
+    success: function (res) {
+      // console.log(res);
+      mlist = []
+      //name time singer time
+      for (let i = 0; i < res.length; i++) {
+        mlist.push({
+          name: res[i].m_album,
+          time: res[i].m_total_long,
+          singer: res[i].m_artist,
+          from: res[i].m_album,
+          purl: res[i].m_album_url,
+          murl: res[i].m_url
+        })
+      }
+      // console.log(mlist);
+      showMlist()
+    },
+    //请求失败回调函数
+    error: function (e) {
+      console.log(e.status)
+      console.log(e.responseText)
+    }
+  })
 
 }
 
-function showGedan() {
-    var copyList = gdlist.map(function (item,index) {
-        return `<li onclick="choose(${index})" class="gblock">
+function showGedan () {
+  var copyList = gdlist.map(function (item, index) {
+    return `<li onclick="choose(${index})" class="gblock">
                 <div  class="gblock clearFloat">
                 <img src="${item.url}" class="gimg">
                 <div  class="gbname">${item.name}</div>
                 </div>
                 </li>`
-    })
-    gul.innerHTML = copyList.join('');
+  })
+  gul.innerHTML = copyList.join('')
 }
 
-function choose(index) {
-    // console.log(index);
-    markNum == index;
-    pic.style.backgroundImage = 'url(' + gdlist[index].url + ')';
-    te.innerHTML = gdlist[index].name;
-    showGedan();
-    getMlist();
+function choose (index) {
+  // console.log(index);
+  markNum == index
+  pic.style.backgroundImage = 'url(' + gdlist[index].url + ')'
+  te.innerHTML = gdlist[index].name
+  showGedan()
+  getMlist()
 }
 
-function showMlist() {
-    if(mlist.length){
-        var copyList = mlist.map(function (item,index) {
-            return `<tr>
+function showMlist () {
+  if (mlist.length) {
+    var copyList = mlist.map(function (item, index) {
+      return `<tr>
                 <th>
                     <div class="r1">
                         <span>${index + 1}</span>
-                        <img src="img/mplay-b.png" onclick="bofang(${index})" id="${'kimg'+index}">
+                        <img src="img/mplay-b.png" onclick="bofang(${index})" id="${'kimg' + index}">
                     </div>
 
                 </th>
@@ -334,53 +332,52 @@ function showMlist() {
                     </div>
                 </th>
             </tr>`
-        })
-        mnum.innerText = mlist.length + '首歌';
-        rlist.innerHTML = copyList.join('');
-    }
-
-}
-
-
-function bofang(index) {
-    setAudio(index);
-    showMlist();
-    var str = 'kimg' + index;
-    var kimg = document.getElementById(str);
-    kimg.src = 'img/mplay-r.png';
-}
-
-function setAudio(index){
-    audio.src = mlist[index].murl;
-    mpic.src = mlist[index].purl;
-    ngname.innerText = mlist[index].name;
-    ngspan.innerText = mlist[index].singer;
-    play.src = 'img/mpause.png';
-    isPlay = false;
-    audio.play();
-}
-
-function getHead(){
-    let str = `http://127.0.0.1:3000/api/user/${uid}`;
-    $.ajax({
-        type:'GET',
-        contentType: 'application/json;charset=UTF-8',
-        url:str,
-        success: function (res) {
-            // console.log(res);
-            uname.innerText = res.u_nickname;
-            uimg.src = res.u_avator_url;
-        },
-        //请求失败回调函数
-        error: function (e) {
-            console.log(e.status)
-            console.log(e.responseText)
-        }
     })
+    mnum.innerText = mlist.length + '首歌'
+    rlist.innerHTML = copyList.join('')
+  }
+
+}
+
+function bofang (index) {
+  setAudio(index)
+  showMlist()
+  var str = 'kimg' + index
+  var kimg = document.getElementById(str)
+  kimg.src = 'img/mplay-r.png'
+}
+
+function setAudio (index) {
+  audio.src = mlist[index].murl
+  mpic.src = mlist[index].purl
+  ngname.innerText = mlist[index].name
+  ngspan.innerText = mlist[index].singer
+  play.src = 'img/mpause.png'
+  isPlay = false
+  audio.play()
+}
+
+function getHead () {
+  let str = `http://127.0.0.1:3000/api/user/${uid}`
+  $.ajax({
+    type: 'GET',
+    contentType: 'application/json;charset=UTF-8',
+    url: str,
+    success: function (res) {
+      // console.log(res);
+      uname.innerText = res.u_nickname
+      uimg.src = res.u_avator_url
+    },
+    //请求失败回调函数
+    error: function (e) {
+      console.log(e.status)
+      console.log(e.responseText)
+    }
+  })
 }
 
 window.onload = function () {
-    getGe();
-    getHead();
-    getHeadbar()
+  getGe()
+  getHead()
+  getHeadbar()
 }

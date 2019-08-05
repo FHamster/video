@@ -8,7 +8,8 @@ router.get('/viewTest', function (req, res, next) {
 })
 router.get('/musicView', function (req, res, next) {
   // res.type('html')
-  res.render('music')
+  console.log('musicView' + req.session.uId)
+  res.render('music',{ uId: req.session.uId})
 })
 router.get('/videoView', function (req, res, next) {
   var vId = req.query.vId
@@ -19,7 +20,10 @@ router.get('/videoView', function (req, res, next) {
   res.render('video',{ uId: uId,vId: vId})
 })
 router.get('/myVideoView', function (req, res, next) {
-  req.session.uId = req.query.uId
+  if (req.query.uId) {
+    req.session.uId = req.query.uId
+  }
+
   console.log(req.session.uId)
   // res.type('html')
   res.render('myVideo',{ uId: req.session.uId})

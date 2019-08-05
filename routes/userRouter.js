@@ -53,6 +53,7 @@ router.post('/auth', (req, res) => {
  * 用户注册，向后台提交新用户数据
  */
 router.post('/user', (req, res) => {
+  let uId = req.body.uId
   let uNickname = req.body.uNickname
   let uPsw = req.body.uPsw
 

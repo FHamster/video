@@ -51,7 +51,7 @@ let fun = function () {
         var li = document.getElementById('number' + z);
         // console.log(z);
         li.childNodes[1].src = videoList[z].v_pre//封面图
-        console.log(z,videoList[z].pre);
+        console.log(z,videoList[z].v_pre);
         li.childNodes[3].childNodes[1].innerHTML = videoList[z].v_title;
         li.childNodes[3].childNodes[3].innerHTML = getTime(videoList[z].v_total_long);
         li.onclick = function () {
@@ -70,7 +70,9 @@ let fun = function () {
 
   let vId = document.getElementById('video_id').innerHTML
   console.log('title:' + vId)
-  let url = `'http://127.0.0.1:3000/api/video/${vId}'`
+  let url = `http://localhost:3000/api/video/${vId}`
+  console.log(url)
+
   // thisVideo 需获取
   $.ajax({
     type: 'GET',

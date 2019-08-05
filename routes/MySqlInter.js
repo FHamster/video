@@ -24,8 +24,9 @@ module.exports = MyQuery = function (sqlSta, success) {
       connect.query(sqlSta, (error, result) => {
         if (error) throw error
         if (success) success(result)
-      })
 
+      })
+      connect.release();
     }
   })
 }

@@ -54,8 +54,28 @@ login.onclick = function () {
 }
 
 upReg.onclick = function () {
+  console.log('upReg')
   var user = uName.value
   var pwd = uPassword.value
+  //改成昵称了
   var eml = ueamil.value
-  $.ajax({})
+  $.ajax({
+    type: 'POST',//post get delete put
+    //请求的媒体类型
+    // contentType: 'application/json;charset=UTF-8',
+    //请求地址
+    url: 'http://127.0.0.1:3000/api/user',
+    //数据，json字符串
+    data: { uId: user, uNickname: eml, uPsw: pwd },
+
+    //请求成功回调函数
+    success: function (data) {
+      alert(data.message)
+    },
+    //请求失败回调函数
+    error: function (e) {
+      console.log(e.status)
+      console.log(e.responseText)
+    }
+  })
 }

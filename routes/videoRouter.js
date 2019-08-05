@@ -39,22 +39,6 @@ router.get('/video', (req, res) => {
   })
 })
 
-/**
- * 显示所有视频信息
- */
-router.get('/video', (req, res) => {
-  let sql = `select * from video`
-  console.log(sql)
-
-  MyQuery(sql, data => {
-    console.log(`data is ${data[0]}`)
-    if (data.length > 0) {
-      res.json(data)
-    } else {
-      res.json({ state: false, msg: '没有查询到视频' })
-    }
-  })
-})
 
 /**
  * 显示随机视频信息
