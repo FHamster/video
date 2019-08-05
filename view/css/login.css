@@ -106,7 +106,68 @@
     font-size: 14px;
     text-align: center;
     cursor: pointer;
+    margin: 90px auto;
 }
 .main .log .signIn .login:hover{
 
+}
+
+.main .log .signIn .reg{
+    color: #555;
+    display: inline-block;
+    border: 1px solid #ccc;
+    height: 36px;
+    border-radius: 2px;
+    width: 184px;
+    line-height: 38px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 34px;
+    margin-top: 90px;
+}
+
+.main .log .signUp{
+    display: block;
+    float: right;
+    width: 469px;
+    height: 500px;
+    /*margin-left: 30px;*/
+    border: 1px solid black;
+    position: absolute;
+    margin-left: 528px;
+    /*display: none;*/
+}
+
+.main .log .signUp .uName{
+    width: 388px;
+    border: 1px solid #dddddd;
+    font-size: 14px;
+    padding: 10px;
+    height: 18px;
+    vertical-align: middle;
+    border-radius: 4px;
+    margin: 20px auto;
+}
+
+.main .log .signUp .email{
+    width: 388px;
+    border: 1px solid #dddddd;
+    font-size: 14px;
+    padding: 10px;
+    height: 18px;
+    vertical-align: middle;
+    border-radius: 4px;
+    margin: 20px auto;
+}
+
+.main .log .signUp .uPassword{
+    width: 388px;
+    border: 1px solid #dddddd;
+    font-size: 14px;
+    padding: 10px;
+    height: 18px;
+    vertical-align: middle;
+    border-radius: 4px;
+    margin: 20px auto;
 }
